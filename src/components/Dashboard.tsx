@@ -21,7 +21,7 @@ export default function Dashboard() {
   const [resumeData, setResumeData] = useState<ResumeData | null>(null);
   const [jdText, setJdText] = useState<string>('');
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
-  
+
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [activeTab, setActiveTab] = useState<ActiveTab>('skills');
   const [parseError, setParseError] = useState<string>('');
@@ -30,7 +30,7 @@ export default function Dashboard() {
   const handleParseSuccess = (data: ResumeData) => {
     setResumeData(data);
     setParseError('');
-    
+
     // Automatically run baseline analysis (without JD details)
     const baselineJd = parseJobDescription('');
     const baselineResult = matchResumeWithJd(data, baselineJd);
@@ -40,7 +40,7 @@ export default function Dashboard() {
   // Handle analysis trigger (resume + pasted JD)
   const handleAnalyze = (text: string) => {
     if (!resumeData) return;
-    
+
     setIsAnalyzing(true);
     setJdText(text);
 
@@ -71,14 +71,14 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-teal-500 selection:text-slate-950">
-      
+
       {/* Decorative background glows */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-[120px] pointer-events-none -z-10 animate-pulse" />
       <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none -z-10 animate-pulse" />
 
       {/* Main Container */}
       <main className="flex-1 w-full max-w-6xl mx-auto px-4 py-8 sm:px-6 lg:px-8 space-y-8">
-        
+
         {/* Hero Section */}
         <section className="text-center py-6 space-y-4">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-teal-500/10 border border-teal-500/20 text-teal-400 text-xs font-bold rounded-full shadow-[0_0_15px_rgba(20,184,166,0.1)]">
@@ -124,9 +124,9 @@ export default function Dashboard() {
 
               {/* Action Buttons */}
               <div className="flex items-center gap-3 w-full sm:w-auto">
-                <ExportReportButton 
-                  result={analysisResult} 
-                  resumeData={resumeData} 
+                <ExportReportButton
+                  result={analysisResult}
+                  resumeData={resumeData}
                   hasJd={hasJd}
                 />
                 <button
@@ -140,10 +140,10 @@ export default function Dashboard() {
             </div>
 
             {/* Circular Scores and Breakdown */}
-            <ScoresDisplay 
-              result={analysisResult} 
-              resumeData={resumeData} 
-              hasJd={hasJd} 
+            <ScoresDisplay
+              result={analysisResult}
+              resumeData={resumeData}
+              hasJd={hasJd}
             />
 
             {/* Tabbed Interactive Views */}
@@ -159,11 +159,10 @@ export default function Dashboard() {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id as ActiveTab)}
-                    className={`px-4 py-2.5 font-bold text-xs sm:text-sm border-b-2 whitespace-nowrap transition-all cursor-pointer ${
-                      activeTab === tab.id
+                    className={`px-4 py-2.5 font-bold text-xs sm:text-sm border-b-2 whitespace-nowrap transition-all cursor-pointer ${activeTab === tab.id
                         ? 'border-teal-500 text-teal-400 bg-teal-500/5'
                         : 'border-transparent text-slate-500 hover:text-slate-300 hover:border-slate-800'
-                    }`}
+                      }`}
                   >
                     {tab.label}
                   </button>
@@ -173,26 +172,26 @@ export default function Dashboard() {
               {/* Tab panels */}
               <div className="transition-all duration-300">
                 {activeTab === 'skills' && (
-                  <SkillsComparison 
-                    skillsMatch={analysisResult.skillsMatch} 
-                    hasJd={hasJd} 
+                  <SkillsComparison
+                    skillsMatch={analysisResult.skillsMatch}
+                    hasJd={hasJd}
                   />
                 )}
                 {activeTab === 'projects' && (
-                  <ProjectRelevance 
-                    projects={analysisResult.projectRelevance} 
-                    hasJd={hasJd} 
+                  <ProjectRelevance
+                    projects={analysisResult.projectRelevance}
+                    hasJd={hasJd}
                   />
                 )}
                 {activeTab === 'experience' && (
-                  <ExperienceMatch 
-                    experienceAnalysis={analysisResult.experienceAnalysis} 
-                    hasJd={hasJd} 
+                  <ExperienceMatch
+                    experienceAnalysis={analysisResult.experienceAnalysis}
+                    hasJd={hasJd}
                   />
                 )}
                 {activeTab === 'recommendations' && (
-                  <Recommendations 
-                    recommendations={analysisResult.recommendations} 
+                  <Recommendations
+                    recommendations={analysisResult.recommendations}
                   />
                 )}
                 {activeTab === 'security' && (
@@ -214,14 +213,14 @@ export default function Dashboard() {
               Built by Mansi Singh
             </p>
             <p className="text-slate-650 text-xs">
-              Contact: <a href="mailto:your-email@example.com" className="text-teal-450 hover:underline">your-email@example.com</a>
+              Contact: <a href="mailto:mansisingh2072@gmail.com" className="text-teal-450 hover:underline">mansisingh2072@gmail.com"</a>
             </p>
           </div>
-          
+
           <div>
-            <a 
-              href="https://digitalheroesco.com" 
-              target="_blank" 
+            <a
+              href="https://digitalheroesco.com"
+              target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-5 py-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-slate-950 font-bold text-xs rounded-xl shadow-[0_0_15px_rgba(20,184,166,0.1)] hover:shadow-[0_0_20px_rgba(20,184,166,0.25)] transition-all cursor-pointer border-none"
             >
